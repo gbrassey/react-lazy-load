@@ -102,7 +102,7 @@ export default class LazyLoad extends Component {
   }
 
   render() {
-    const { children, className, height, width } = this.props;
+    const { children, className, height, width, placeholder } = this.props;
     const { visible } = this.state;
 
     const elStyles = { height, width };
@@ -114,7 +114,7 @@ export default class LazyLoad extends Component {
 
     return (
       <div className={elClasses} style={elStyles}>
-        {visible && Children.only(children)}
+        {visible ? Children.only(children) : placeholder}
       </div>
     );
   }
@@ -135,6 +135,7 @@ LazyLoad.propTypes = {
   offsetRight: PropTypes.number,
   offsetTop: PropTypes.number,
   offsetVertical: PropTypes.number,
+  placeholder: PropTypes.node,
   threshold: PropTypes.number,
   throttle: PropTypes.number,
   width: PropTypes.oneOfType([
